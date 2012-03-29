@@ -1,0 +1,24 @@
+h1. PHP_WADL_parser
+
+A highly experimental class to read and 'execute' REST methods described by WADL.  Currently has a minor Drupal integration bit, and barely tested with the Fedora WADL.  This was mostly just written because I knew it could be, and wouldn't be too long of a task.
+
+h2. Usage
+
+The WADL_REST class (defined in WADL_REST.inc) needs to be instantiated with an associative array of parameters, containing at least the 'wadl_url', which is where the WADL XML file is pulled from (using curl).  It also accepts 'username' and 'password', which are by default specified any time a curl call is made.
+
+After instantiation, the REST 'functions' can then be called against the instantiated WADL_REST object. For example: <pre><code>
+  <?php
+    //Instantiate the WADL_REST, giving the location of the WADL XML file to load.
+    $api = new WADL_REST(array(
+      'wadl_url' => 'http://some-host/and/wadl/file/path',
+    ));
+    
+    //Let's say the WADL defines a function helloWorld.  We can then call it like:
+    echo $api->helloWorld();
+  ?>
+</code></pre>
+
+This would likely be expected to yield something like: 
+<pre>
+  Hello world!
+</pre>
