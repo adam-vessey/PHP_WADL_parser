@@ -19,7 +19,7 @@ function exp_fedora_api_init() {
 /**
  * Get an instance of the API, generated from the WADL
  */
-function exp_get_fedora_api($params = array()) {
+function exp_get_fedora_api(array $params = array()) {
   global $user;
   static $instance = NULL;
   

@@ -1,5 +1,6 @@
 name = Fedora REST API
 description = Implementation using the WADL file to get the functions dynamically.
+dependencies[] = fedora_repository
 package = Fedora Repository
 version = 6.1dev
 core = 6.x
