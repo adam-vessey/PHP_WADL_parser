@@ -1,0 +1,42 @@
+<?php
+
+function exp_fedora_api_init() {
+  $api = exp_get_fedora_api();
+  
+  dsm($api->get_methods(), 'List of methods from WADL');
+  
+  try {
+    dsm($api->listDatastreams(array(
+      'pid' => 'usc:mirc',
+      'format' => 'text/xml',
+    )), 'list test');
+  }
+  catch (WADLFunctionNotFound $e) {
+    dsm('Function not in WADL?');
+  }
+}
+
+/**
+ * Get an instance of the API, generated from the WADL
+ */
+function exp_get_fedora_api($params = array()) {
+  global $user;
+  static $instance = NULL;
+  
+  //Get a new instance if one isn't already setup.
+  if (!$instance || $params) {
+    module_load_include('inc', 'exp_fedora_api', 'Fedora_REST');
+    
+    if (!$params) {
+      $params = array(
+        'wadl_url' => variable_get('fedora_base_url', 'http://localhost:8080/fedora') . '/objects/application.wadl',
+        'username' => $user->name,
+        'password' => $user->pass,
+      );
+    }
+    
+    $instance = new Fedora_REST($params);
+  }
+  
+  return $instance;
+}
