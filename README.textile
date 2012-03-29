@@ -6,7 +6,9 @@ h2. Usage
 
 The WADL_REST class (defined in WADL_REST.inc) needs to be instantiated with an associative array of parameters, containing at least the 'wadl_url', which is where the WADL XML file is pulled from (using curl).  It also accepts 'username' and 'password', which are by default specified any time a curl call is made.
 
-After instantiation, the REST 'functions' can then be called against the instantiated WADL_REST object. For example: <pre><code>
+After instantiation, the REST 'functions' can then be called against the instantiated WADL_REST object. For example:
+<pre>
+<code>
   <?php
     //Instantiate the WADL_REST, giving the location of the WADL XML file to load.
     $api = new WADL_REST(array(
@@ -16,7 +18,8 @@ After instantiation, the REST 'functions' can then be called against the instant
     //Let's say the WADL defines a function helloWorld.  We can then call it like:
     echo $api->helloWorld();
   ?>
-</code></pre>
+</code>
+</pre>
 
 This would likely be expected to yield something like: 
 <pre>
